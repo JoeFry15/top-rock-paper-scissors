@@ -22,11 +22,33 @@ function playRound(playerSelection, computerSelection) {
   }
 }
 
-let btn = document.querySelectorAll("button");
+const score = [0, 0];
+const resultsDiv = document.getElementById("results");
+resultsDiv.innerText = `Computer: ${score[0]} Player: ${score[1]}`;
 
-btn.forEach((element) => {
+let btns = document.querySelectorAll("button");
+
+btns.forEach((element) => {
   element.addEventListener("click", (e) => {
     const result = playRound(e.target.innerText, getComputerChoice());
-    console.log(result);
+    if (result === "player") {
+      score[1]++;
+    } else if (result === "computer") {
+      score[0]++;
+    }
+    // add break out of game
+    if (score[0] >= 5) {
+      resultsDiv.innerText = "Computer wins! Game over.";
+      btns.forEach((button) => {
+        button.disabled = true;
+      });
+    } else if (score[1] >= 5) {
+      resultsDiv.innerText = "Player wins! Game over.";
+      btns.forEach((button) => {
+        button.disabled = true;
+      });
+    } else {
+      resultsDiv.innerText = `Computer: ${score[0]} Player: ${score[1]}`;
+    }
   });
 });

@@ -36,7 +36,6 @@ btns.forEach((element) => {
     } else if (result === "computer") {
       score[0]++;
     }
-    // add break out of game
     if (score[0] >= 5) {
       resultsDiv.innerText = "Computer wins! Game over.";
       btns.forEach((button) => {
